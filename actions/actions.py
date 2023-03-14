@@ -4,11 +4,9 @@ import time
 from selenium.common.exceptions import NoSuchElementException
 from actions.webdriver_inition import BrowserInit
 
+"""Базовые методы для всех файлов"""
 
 driver = BrowserInit().driver
-
-"""Базовые методы
-Это общие методы, применимые для всех станиц"""
 
 
 def open_page(url):
