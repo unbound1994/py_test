@@ -2,7 +2,7 @@ import unittest
 import time
 
 from selenium.common.exceptions import NoSuchElementException
-from actions.webdriver_inition import BrowserInit
+from actions.WebdriverInitialization import BrowserInit
 
 """Базовые методы для всех файлов"""
 
@@ -22,7 +22,6 @@ def is_element_present(method, locator):
 
 
 def find_elem(locator):
-    print(*locator)
     driver.find_element(*locator)
 
 

@@ -1,9 +1,6 @@
-import os
-from read_env import read_env
-
 from actions.actions import *
-from login_locators.login_page import LoginPage
-
+from login_locators.LoginLocators import LoginPage
+from actions.DBConnection import *
 
 path = "../../.env"
 read_env(path)

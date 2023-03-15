@@ -7,7 +7,7 @@ class BrowserInit:
         self.driver = webdriver.Chrome()
         self.chr_options = webdriver.ChromeOptions()
 
-    def inition_browser(self):
+    def initialization_browser(self):
         yield self.driver
         print("\nquit browser..")
         self.driver.quit()
