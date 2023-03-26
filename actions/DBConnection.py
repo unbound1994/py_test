@@ -34,6 +34,6 @@ class DBConnection:
         except Exception as ex:
             print(Exception('Something went wrong: '), ex)
         except ConnectionError as ce:
-            print(RuntimeError('Failed to open database'), ce)
+            print(RuntimeError('Failed to open database because '), ce)
         finally:
             self.dbh.close()
