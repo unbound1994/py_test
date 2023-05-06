@@ -10,13 +10,13 @@ def test_page():
 
     waiter(30)
 
-    CHECK = (By.CLASS_NAME, 'jss1169.jss1173.jss1874')
+    CHECK = (By.XPATH, '//*[text() = \'You have no projects for review\']')
     check_text = 'You have no projects for review'
 
-    waiter(5)
+    try:
+        while find_elem(CHECK).text == check_text:
+            driver.refresh()
+            waiter(4)
+    except NoSuchElementException:
+        sendMessage('Кажется пришел проект на ревью!', 1670987669)
 
-    while find_elem(CHECK).text == check_text:
-        waiter(2)
-        driver.refresh()
-
-    sendMessage('Кажется пришел проект на ревью!', 1670987669)
