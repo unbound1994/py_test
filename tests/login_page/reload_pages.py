@@ -35,4 +35,4 @@ def test_page():
     if find_elem(CHECK).text != check_text:
         screenshot.write(driver.get_screenshot_as_png())
 
-    # sendMessage('Кажется пришел проект на ревью!', 1670987669)
+    sendMessage('Кажется пришел проект на ревью!', 1670987669)
