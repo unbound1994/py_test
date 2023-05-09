@@ -1,5 +1,5 @@
 import requests
-import os
+
 from read_env import read_env
 
 
@@ -10,8 +10,6 @@ def getUpdates():
     TOKEN = '6176689920:AAGkjr-ahrQLcnVUKs4DzVyq8MG0b4W1LaU'
     url = f"https://api.telegram.org/bot{TOKEN}/getUpdates"
     return requests.get(url).json()
-
-
 
 
 def sendMessage(message, chat_id):
