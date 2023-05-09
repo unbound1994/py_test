@@ -1,38 +1,19 @@
-import unipath
-
-from actions.actions import *
-from selenium.webdriver.common.by import By
+import time
+import requests
 
 from actions.notify_telegram import sendMessage
 
 
-def test_page():
-    name = time.strftime("%d.%m.%Y_%H-%M-%S")
-    fullName = "Screenshot_" + name + ".png"
-    path = unipath.Path(__file__).parent.parent.parent + "\\" + "Screenshots\\"
+def reload_page():
+    url = 'https://edu.21-school.ru/services/paper/load_actual_papers?organizationId=6bfe3c56-0211-4fe1-9e59' \
+          '-51616caac4dd'
 
-    if not os.path.exists(path):
-        os.makedirs(path)
+    request = requests.get(url)
+    return request.json()['data']
 
-    fullPath = path + fullName
-    screenshot = open(r""+fullPath, "wb")
 
-    url = 'https://edu.21-school.ru/projects/code-review'
-    open_page(url)
+while not reload_page():
+    print("Checking... Actual data is - " + str(reload_page()))
+    time.sleep(5)
 
-    waiter(30)
-
-    CHECK = (By.XPATH, '//*[text() = \'You have no projects for review\']')
-    check_text = 'You have no projects for review'
-
-    try:
-        while find_elem(CHECK).text == check_text:
-            driver.refresh()
-            waiter(4)
-    except Exception as e:
-        print("Something wrong - ", e)
-
-    if find_elem(CHECK).text != check_text:
-        screenshot.write(driver.get_screenshot_as_png())
-
-    sendMessage('Кажется пришел проект на ревью!', 1670987669)
+sendMessage('Кажется пришел проект на ревью!', 1670987669)
