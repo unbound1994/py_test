@@ -31,6 +31,9 @@ while not getDataFromJSON():
     time.sleep(5)
 
 
+sendMessage('Кажется пришел проект на ревью!', 1670987669)
+
+
 if data:
     print("Available data. Restart browser session!\n")
 
@@ -44,5 +47,3 @@ if data:
 
     print("Ready for login!")
     find_elem(BUTTON).click()
-
-sendMessage('Кажется пришел проект на ревью!', 239402268)
