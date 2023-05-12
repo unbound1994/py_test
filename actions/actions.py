@@ -2,6 +2,7 @@ import unittest
 import time
 import os
 
+import unipath
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
@@ -28,7 +29,10 @@ def is_element_present(locator):
 
 
 def find_elem(locator):
-    return driver.find_element(*locator)
+    try:
+        return driver.find_element(*locator)
+    except NoSuchElementException:
+        return False
 
 
 def writer(locator, message, *args):
