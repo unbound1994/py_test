@@ -25,8 +25,8 @@ def test_page():
     url = 'https://edu.21-school.ru/projects/code-review'
     open_page(url)
 
-    find_elem(LOGIN).send_keys("os.environ.get('LOG')")
-    find_elem(PASSWD).send_keys("os.environ.get('PASSW')")
+    find_elem(LOGIN).send_keys(os.environ.get('LOG'))
+    find_elem(PASSWD).send_keys(os.environ.get('PASSW'))
 
     waiter(1)
 
@@ -68,3 +68,6 @@ def test_page():
     except Exception as e:
         screenShooter()
         print("Вообще херня произошла, которая никак не учитывается. Сделан скриншот - ", e)
+
+
+test_page()
