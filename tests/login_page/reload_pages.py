@@ -44,19 +44,14 @@ def test_page():
     # нейронка, не иначе
     try:
         while flag_checker:
-            if not find_elem(CHECK):
-                screenShooter()
-                sendMessage('Блока "no projects" нет. Возможно пришел проект на ревью!', chatID)
-                flag_checker = False
-            elif find_elem(CHECK):
-                if find_elem(CHECK).text == check_text:
-                    driver.refresh()
-                    flag_checker = True
-                    waitTime = 4
-                    waiter(waitTime)
+            if not find_elem(SECOND_CHECK):
+                driver.refresh()
+                waitTime = 4
+                waiter(waitTime)
+                flag_checker = True
             elif not find_elem(CHECK) & find_elem(SECOND_CHECK):
                 screenShooter()
-                sendMessage('Блоки поменялись. Кажется пришел проект на ревью!', chatID)
+                sendMessage('Кажется пришел проект на ревью!', chatID)
                 flag_checker = False
             elif not (find_elem(CHECK) & find_elem(SECOND_CHECK)):
                 screenShooter()
