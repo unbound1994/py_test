@@ -34,7 +34,7 @@ def test_page():
     find_elem(BUTTON).click()
 
     CHECK = (By.XPATH, '//*[text() = \'You have no projects for review\']')
-    DOUBLE_CHECK = (By.XPATH, '//a[@href="'+url+'"]')
+    SECOND_CHECK = (By.XPATH, '//*[text() = \'Available for code review\']')
     check_text = 'You have no projects for review'
 
     flag_checker = True
@@ -52,14 +52,14 @@ def test_page():
                     driver.refresh()
                     flag_checker = True
                     waiter(4)
-            elif not find_elem(CHECK) & find_elem(DOUBLE_CHECK):
+            elif not find_elem(CHECK) & find_elem(SECOND_CHECK):
                 screenShooter()
                 sendMessage('Блоки поменялись. Кажется пришел проект на ревью!', 1670987669)
                 flag_checker = False
             elif not find_elem(CHECK):
-                if not find_elem(DOUBLE_CHECK):
+                if not find_elem(SECOND_CHECK):
                     screenShooter()
-                    sendMessage('Кажется зависла страница. Нет блока "no projects" и вкладки Review!', 1670987669)
+                    sendMessage('Кажется зависла страница. Нет блока "no projects" и вкладки "Available for"!', 1670987669)
                     flag_checker = False
             else:
                 screenShooter()
