@@ -38,32 +38,37 @@ def test_page():
     check_text = 'You have no projects for review'
 
     flag_checker = True
-
+    waitTime = 0
+    chatID = 1670987669
 
     # нейронка, не иначе
     try:
         while flag_checker:
             if not find_elem(CHECK):
                 screenShooter()
-                sendMessage('Блока "no projects" нет. Возможно пришел проект на ревью!', 1670987669)
+                sendMessage('Блока "no projects" нет. Возможно пришел проект на ревью!', chatID)
                 flag_checker = False
             elif find_elem(CHECK):
                 if find_elem(CHECK).text == check_text:
                     driver.refresh()
                     flag_checker = True
-                    waiter(4)
+                    waitTime = 4
+                    waiter(waitTime)
             elif not find_elem(CHECK) & find_elem(SECOND_CHECK):
                 screenShooter()
-                sendMessage('Блоки поменялись. Кажется пришел проект на ревью!', 1670987669)
+                sendMessage('Блоки поменялись. Кажется пришел проект на ревью!', chatID)
                 flag_checker = False
-            elif not find_elem(CHECK):
-                if not find_elem(SECOND_CHECK):
-                    screenShooter()
-                    sendMessage('Кажется зависла страница. Нет блока "no projects" и вкладки "Available for"!', 1670987669)
+            elif not (find_elem(CHECK) & find_elem(SECOND_CHECK)):
+                screenShooter()
+                driver.refresh()
+                waitTime = 4
+                waiter(waitTime)
+                if not (find_elem(CHECK) & find_elem(SECOND_CHECK)):
+                    sendMessage('Кажется зависла страница. Нет блока "no projects" и вкладки "Available for"!', chatID)
                     flag_checker = False
             else:
                 screenShooter()
-                sendMessage('Ни одно из условий не сработало!', 1670987669)
+                sendMessage('Ни одно из условий не сработало!', chatID)
                 break
     except Exception as e:
         screenShooter()
