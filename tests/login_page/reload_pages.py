@@ -35,7 +35,6 @@ def test_page():
 
     CHECK = (By.XPATH, '//*[text() = \'You have no projects for review\']')
     SECOND_CHECK = (By.XPATH, '//*[text() = \'Available for code review\']')
-    check_text = 'You have no projects for review'
 
     flag_checker = True
     waitTime = 0
@@ -49,10 +48,11 @@ def test_page():
                 waitTime = 4
                 waiter(waitTime)
                 flag_checker = True
-            elif not find_elem(CHECK) & find_elem(SECOND_CHECK):
-                screenShooter()
-                sendMessage('Кажется пришел проект на ревью!', chatID)
-                flag_checker = False
+            elif not find_elem(CHECK):
+                if find_elem(SECOND_CHECK):
+                    screenShooter()
+                    sendMessage('Кажется пришел проект на ревью!', chatID)
+                    flag_checker = False
             elif not find_elem(CHECK):
                 if not find_elem(SECOND_CHECK):
                     screenShooter()
