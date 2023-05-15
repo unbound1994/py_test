@@ -53,14 +53,14 @@ def test_page():
                 screenShooter()
                 sendMessage('Кажется пришел проект на ревью!', chatID)
                 flag_checker = False
-            elif not (find_elem(CHECK) & find_elem(SECOND_CHECK)):
-                screenShooter()
-                driver.refresh()
-                waitTime = 4
-                waiter(waitTime)
-                if not (find_elem(CHECK) & find_elem(SECOND_CHECK)):
+            elif not find_elem(CHECK):
+                if not find_elem(SECOND_CHECK):
+                    screenShooter()
+                    driver.refresh()
+                    waitTime = 4
+                    waiter(waitTime)
                     sendMessage('Кажется зависла страница. Нет блока "no projects" и вкладки "Available for"!', chatID)
-                    flag_checker = False
+                    flag_checker = True
             else:
                 screenShooter()
                 sendMessage('Ни одно из условий не сработало!', chatID)
